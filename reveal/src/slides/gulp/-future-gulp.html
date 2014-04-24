@@ -1,0 +1,54 @@
+<section>
+	<h1>The future process</h1>
+	<aside class="notes">
+		We're going to stray a bit from gulp and into the future. Not the future of build tools, but rather the future of development tools.
+	</aside>
+</section>
+<section>
+	<h4>THE</h4>
+	<h1>code-compile-run</h1>
+	<h4>LOOP</h4>
+
+	<aside class="notes">
+		We are still a bit stuck in the code-compile-run loop.
+
+		There are initiatives on many fronts to make tools for us to create digital things in new ways. Projects that try to break out of the code-compile-run loop.
+
+		Some are taking a visual approach, like <a href="http://macaw.co">Macaw</a> and <a href="http://www.weld.io/">Weld</a>. They make it possible to modify the "interface", but at the same time they break the connection to the code.
+
+		Some, like <a href="http://brackets.io/">Brackets</a>, <a href="http://www.lighttable.com/">LightTable</a> and <a href="http://noflojs.org/">NoFlo</a> enhance they way we work with code. Either by visualizing code structure and data flow or by bringing more visual tools into the editor.
+
+		I think we need tools that do both. 
+
+		To go back to the example of the pen. We need to both be able draw freely, to see what we draw immediately and to easily modify the output directly. That is, we need to get immediate feedback on the code we write, and we ALSO need to be able to change the code by modifying the output. 
+
+		If we view both the code that we write and the output, whatever it way be, as representations of the same object, then we should be able to modify both. The code is a representation of the UI as much as the other way around. When we can do that I would be a lot happier.
+	</aside>
+</section>
+<section>
+	<div class="horiz-flex">
+		<div class="box"><pre><code><h1>abc</h1></code></pre></div>
+		<div class="box"><span class="h2-size">&#8594;</span></div>
+		<div class="box"><span class="h1-size">*</span></div>
+		<div class="box"><span class="h2-size">&#8594;</span></div>
+		<div class="box box--framed"><span class="h1-size">abc</span></div>
+	</div>
+	<aside class="notes">
+		The first step is to make the code-compile-run loop infinitely small.
+		The second step is to better visualize code output. For example, visualizing how data flows through the applications (when running unit tests) would be a natural development.
+	</aside>
+</section>
+<section>
+	<div class="horiz-flex">
+		<div class="box"><pre><code><h1>abc</h1></code></pre></div>
+		<div class="box"><span class="h2-size">&#8596;</span></div>
+		<div class="box"><span class="h1-size">*</span></div>
+		<div class="box"><span class="h2-size">&#8596;</span></div>
+		<div class="box box--framed"><span class="h1-size">abc</span></div>
+	</div>
+	<aside class="notes">
+		The next step is to blur the line between code and output. Code and output are both representations of the same thing, and changing either should change the other. in this step the visual tools like macaw or weld have completely merged with our code tools.
+
+		I'm actually really excited for the future of coding (or "telling computers what to do").
+	</aside>
+</section>

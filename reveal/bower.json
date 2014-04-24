@@ -1,0 +1,16 @@
+{
+  "name": "reveal-presentation-template",
+  "version": "0.0.0",
+  "dependencies": {
+    "modernizr": "~2.7.1"
+  },
+  "devDependencies": {
+    "jquery": "~2.1.0",
+    "reveal.js": "~2.6.1"
+  },
+  "overrides": {
+    "modernizr": {
+      "main": "modernizr.js"
+    }
+  }
+}

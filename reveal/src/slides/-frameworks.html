@@ -1,0 +1,53 @@
+<section>
+	<h1>Selecting a framework</h1>
+	<aside class="notes">
+		We were going to select a framework for our new apps here at Quinyx, so we looked at the "usual suspects" - Backbone, Ember, Angular, Knockout...
+
+		What do they have in common?
+	</aside>
+</section>
+<section>
+	<h2>MV*</h2>
+	<h2>Templates</h2>
+	<h2>Data binding</h2>
+
+	<aside class="notes">
+		M-V-Whatever
+		Templates with some crippled logic
+		Data binding to help keep views and models in sync.
+	</aside>
+</section>
+<section>
+	<pre><code>
+	<ul class="unstyled">
+		<li ng-repeat="todo in todos">
+			<input type="checkbox" ng-model="todo.done">
+			<span>{{todo.text}}</span>
+		</li>
+	</ul>
+	</code></pre>
+	<pre><code>
+	<ul class="unstyled">
+	  {{#each todos}}
+			<li>
+				&lt;input type="checkbox" {{bindAttr checked="done"}}&gt;
+				<span>{{text}}</span>
+			</li>
+		{{/each}}
+	</ul>
+	</code></pre>
+	<aside class="notes">
+		So you end up with this stuff. Which works ok. It's familiar to everyone?
+		
+		There are a couple of things that bother me with these frameworks. First of all, performance. Performance was the #1 priority for us when selecting frameworks. And these frameworks tendes to run into performance issues. There was a talk on Sthlm.js a while back where some people from MTGx I think had managed to get their Angular app to update in 1.5 sec instead of 8 sec. I'm not a very good coder, so I was a bit hesitant to use a framework where it's possible to get that kind of performance.
+
+		Both Angular and Ember, the main contenders, also has a lot of framework specific concepts and "ways of doing things" that I didn't really like.
+	</aside>
+</section>
+
+<section data-background='img/different.jpg'>
+	<h3 class="dark-text">And now for something completely different<br><br><br><br><br><br><br><br><br></h3>
+	<aside class="notes">
+		We decided not to go down that road.
+	</aside>
+</section>

@@ -1,0 +1,75 @@
+
+// Font and spacing
+
+$base-font-size:    28px!default;
+$base-line-height:  36px!default;
+
+$base-spacing-unit: $base-line-height!default;
+$half-spacing-unit: $base-spacing-unit / 2!default;
+$line-height-ratio: $base-line-height / $base-font-size;
+
+$h1-size:           64px*2!default; // .alpha
+$h2-size:           45px*2!default; // .beta
+$h3-size:           32px*2!default; // .gamma
+$h4-size:           22px*2!default; // .delta
+$h5-size:           16px*2!default; // .epsilon
+$h6-size:           11px*2!default; // .zeta
+
+$deci-size:        	13px!default;
+$centi-size:        12px!default;
+$milli-size:        11px!default;
+$micro-size:        10px!default;
+
+
+$brand-face:  			"Avenir Next", "Helvetica Neue", sans-serif!default;
+// $brand-face:  			"Arvo";
+$base-font-family:	$brand-face!default;
+$h-face:             $brand-face!default;
+
+
+// Round
+
+$brand-round:        3px!default;
+
+// Colors
+
+$q-joy-color:  					#ffe989;
+$q-work-color:  				#45423f;
+$q-human-color:  				#f6d7ab;
+$q-will-color:  				#f4b060;
+$q-link-color:  				#2a5db3;
+
+$background-color:  $q-work-color!default;
+$body-background:   mix($background-color, $q-human-color, 100%)!default;
+
+$base-ui-color:     #f9f9f9!default;
+
+$font-color: 				$base-ui-color!default;
+$quiet-color:				#999!default;
+
+$brand-color:       $q-joy-color!default;
+$brand-color-accent:$q-will-color!default;
+$brand-white:      	#fff!default;
+
+$primary-action-color:#169F4B!default;
+$warning-color:     #a92125!default;
+
+$button-color: $q-link-color !default;
+
+$max-width:         640px!default;
+$top-padding:       1px!default; /* Where does the horizontal grid start? */
+
+$icon-size: 24px;
+$icon-size--small: 16px;
+$icon-size--large: 32px;
+
+$transition-speed: .3s;
+$transition-easing: cubic-bezier(.23,1,.32,1);
+
+/**
+ * Tell inuit.css when breakpoints start.
+ */
+$lap-start:         761px!default;
+$desk-start:        1350px!default;
+
+

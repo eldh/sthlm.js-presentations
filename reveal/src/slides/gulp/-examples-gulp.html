@@ -1,0 +1,29 @@
+<section>
+	<pre><code>
+	gulp.task "_reveal_include", ->
+		gulp.src "src/slides/**/*.html"
+			.pipe includer()
+			.pipe gulp.dest 'app/'
+			.pipe livereload()
+		return
+
+	gulp.task '_reveal', ->
+		gulp.watch "src/slides/**/*.*", ['_reveal_include']
+	</code></pre>
+</section>
+<section>
+	<pre><code>
+	gulp.task "_dist-styles", ->
+		gulp.src file
+			.pipe sass
+				includePaths: includePaths
+				outputStyle: "compressed"
+				sourceComments: "normal"
+				file: file
+			.on "error", logExit
+			.pipe prefix "last 2 versions", "ie 10", "Android 4"
+			.pipe csso()
+			.pipe gulp.dest target + "css/"
+	</code></pre>
+</section>
+<section><h1>DEMO!</h1></section>

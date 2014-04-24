@@ -1,0 +1,70 @@
+/**/
+.slide-background {
+	// background-color: #333 !important;
+}
+.horiz-flex {
+	display: flex;
+	align-items: center;
+	> * {
+		min-width: 20%;
+	}
+}
+.reveal pre {
+	box-shadow: none;
+	border: 1px rgba(255,255,255,.1) solid;
+	> code {
+		background-color: #333;
+		max-height: 70vh;
+		font-family: "Source Code Pro";
+	}
+}
+.main-wrapper {
+	padding-top: $base-spacing-unit;
+}
+
+input.h1-size {
+	background: transparent;
+	font-weight: 600;
+	color: $font-color;
+	border: none;
+}
+
+.no-show {
+	display: none;
+}
+
+.center {
+	text-align: center;
+}
+.left {
+	text-align: left;
+}
+.right {
+	text-align: right;
+}
+
+.sticky {
+	position: -webkit-sticky;
+	position: sticky;
+	top: 10px;
+	z-index:200;
+}
+
+.left-and-right-container {
+	display: flex;
+	flex-direction: row-reverse;
+	justify-content: space-between;
+	align-items: center;
+	align-content: flex-end;
+}
+
+.visuallyhidden {
+	border: 0;
+	clip: rect(0 0 0 0);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	width: 1px;
+}

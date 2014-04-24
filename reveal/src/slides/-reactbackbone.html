@@ -1,0 +1,47 @@
+<section>
+	<h1>backbone &amp; react</h1>
+	<aside class="notes">
+		We have done a few things to make react fit better in with our workflow.
+	</aside>
+</section>
+<section>
+	<h2>Listen to backbone model changes</h2>
+	<pre><code>
+	subscribe: (obj) ->
+		if obj instanceof Backbone.Collection or obj instanceof Backbone.Model
+			_throttledForceUpdate = _.debounce @update.bind(this, null), 0
+			obj.on "add remove change reset sort sync", _throttledForceUpdate, this
+			true
+		false
+
+	update: ->
+		@forceUpdate() if @isMounted()
+	</code></pre>
+
+	<aside class="notes">
+		Just listen to events on backbone models and collections and tell react components to update.
+	</aside>
+</section>
+<section>
+	<h2>Attach tags to 'this'</h2>
+	<div class="horiz-flex">
+		<pre><code>
+			React.DOM.div
+		</code></pre>
+		<h4>&#8594;</h4>
+		<pre><code>
+			@div
+		</code></pre>
+		
+	</div>
+
+	<aside class="notes">
+		Bind React.DOM class references to 'this' for easy access
+	</aside>
+</section>
+<section>
+	<h1>Demo!</h1>
+	<aside class="notes">
+		Show button/login. And dev tools!
+	</aside>
+</section>

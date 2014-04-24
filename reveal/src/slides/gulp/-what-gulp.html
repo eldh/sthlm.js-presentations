@@ -1,0 +1,52 @@
+<section>
+	<h1>Gulp is three things</h1>
+	<aside class="notes">
+		Gulp calls itself "the streaming build system"
+	</aside>
+</section>
+<section>
+	<h2>Streams</h2>
+	<h2 class="fragment">Vinyl</h2>
+	<h2 class="fragment">Orchestrator</h2>
+</section>
+<section>
+	<h1>Streams</h1>
+</section>
+<section data-background="/img/santa.gif">
+	<!-- <h1 class="dark-text" >Streams</h1> -->
+	<aside class="notes">
+		Streams is like a conveyor belt. You put something in at the start, it passes through a number of stations that each do one little thing and then finally it lands.
+
+		It's a really nice way of doing things in the build process, because it encourages you to use very small, focused plugins.
+	</aside>
+</section>
+<section>
+	<h1>Vinyl:</h1>
+	<h2>File meta data</h2>
+	<h2>Path &amp; Content</h2>
+	<aside class="notes">
+		Vinyl is a simple metadata object that describe a file. Gulp primarily uses the filesystem adapter for vinyl, gut could easily use dropbox, s3, ftp or whatever.
+
+		It allows for gulp to use a file abstraction rather than a real file. Though we always use a normal file system.
+	</aside>
+</section>
+<section>
+	<h1>Orchestrator:</h1>
+	<h2>A way to define and run tasks</h2>
+	<aside class="notes">
+		Orchestrator is a way to define and run tasks and dependencies with maximum concurrency.
+	</aside>
+</section>
+<section>
+	<h1>Gulp:</h1>
+	<h2>Fast</h2>
+	<h2>Code over configuration</h2>
+	<aside class="notes">
+		So, we have a nice way of modifying objects in small steps. A nice way to describe files as objects and a nice way to define tasks.
+
+		Gulp is fast for two reasons: First, because it works with file meta objects and doesn't need to write to temp files.
+		Second, because it runs everything with waximum concurrency.
+
+		You define everything with code.
+	</aside>
+</section>

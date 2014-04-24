@@ -1,0 +1,158 @@
+<section>
+	<h1>React</h1>
+	<aside class="notes">
+		Let's talk about react.
+	</aside>
+</section>
+
+<section>
+	<h2>Made by <strong>facebook</strong></h2>
+	<aside class="notes">
+		It's made by facebook, used on facebook (of course) and instagram.
+
+		Open sourced last year.
+	</aside>
+</section>
+
+
+<section>
+	<h1>Only <strong>UI</strong></h1>
+	<h3>Renders UI and responds to events</h3>
+	<aside class="notes">
+		React only handles the UI. It doesn't care about the rest of your application.
+
+		You could use it as thee V to your MVC. Like we do. It's also been used with Angular.
+	</aside>
+</section>
+
+<section>
+	<h2>DOM operations are slow &amp; hard</h2>
+	<h2>Javascript is fast</h2>
+	<aside class="notes">
+		DOM operations are really slow, which means you have to optimize them to get decent performance.
+		DOM operations are also hard to optimize.
+		
+		Javascript is fast. We can use javascript to help us solve the problems with DOM operations.
+
+		With these facts as base, the people who designed React decided to do re-think some established best practices.
+	</aside>
+</section>
+
+<section>
+	<h1>Virtual DOM <br>&amp;<br> synthetic events</h1>
+	<aside class="notes">
+		Why? To be able to be smart about which parts of the view we need to update. Ergo, make it really fast. React also batches DOM operations to make things even faster.
+
+		There is another flip side to this. You're not tied to a browser, or even to a real DOM. You can just as easily render to a canvas or whatever. The virtual dom is just a heirarchy of your view components.
+	</aside>
+</section>
+<section>
+	<h1>Data flow</h1>
+	<aside class="notes">
+		Why? To enable updating the entire app state every time.
+
+		If a model changes, all the related views will update.
+
+		Example: Update my birth date. Means my age changes, and number of days to my birthday changes, and that list of people who share birthday with me changes. I don't need to care about any of it. I don't have to rely on digest loops or data binding or anything.
+	</aside>
+</section>
+
+<section>
+	<h1>No templates</h1>
+	<aside class="notes">
+		So, we are disconnecting ourselves from the DOM. Everything in the React apps is pure JS. There are no templates.
+
+		The first thing I said after looking at React was "It looks ok, but it needs templates". Why? 
+
+		Templates are not seperation of concerns. They are a separation of technologies.
+
+		They represent initial state, then view code moulds the DOM in response to state changes.
+		
+		Templates are purposefully crippled.
+
+		With react, you daclaritively describe behaviour and state using a powerful programming language (javascript).
+	</aside>
+</section>
+
+<section>
+	<h1>Syntax</h1>
+	<aside class="notes">
+		Just a quick mention on syntax
+	</aside>
+</section>
+
+<section>
+	<h2>jsx</h2>
+	<pre><code>
+	/** @jsx React.DOM */
+	var HelloMessage = React.createClass({
+		render: function() {
+			return <div>Hello {this.props.name}</div>;
+		}
+	});
+	</code></pre>
+	<pre><code>
+	&lt;HelloMessage name="John Doe" /&gt;
+	</code></pre>
+	<pre><code>
+	<div>Hello John Doe</div>
+	</code></pre>
+	<aside class="notes">
+		React comes with a js abstraction called jsx that makes component declarations look a bit more like html.
+	</aside>
+</section>
+<section>
+	<h2>Javascript</h2>
+	<pre><code>
+	var HelloMessage = React.createClass({displayName: 'HelloMessage',
+		render: function() {
+			return React.DOM.div(null, "Hello ", this.props.name);
+		}
+	});
+	</code></pre>
+	<pre><code>
+	HelloMessage({name: 'John Doe'});
+	</code></pre>
+	<pre><code>
+	<div>Hello John Doe</div>
+	</code></pre>
+	<aside class="notes">
+		It's completely volontary to use and compiles into normalie js as such.
+	</aside>
+</section>
+<!-- <section>
+	<h2>Coffeescript</h2>
+	<pre><code>
+	HelloMessage = React.createClass
+		displayName: "HelloMessage"
+		render: ->
+			React.DOM.div {},
+				"Hello #{@props.name}"
+	</code></pre>
+	<pre><code>
+	HelloMessage
+		name: 'John Doe'
+	</code></pre>
+	<pre><code>
+	<div>Hello John Doe</div>
+	</code></pre>
+</section>
+ --><section>
+	<pre><code>
+	@ul {className: 'unstyled'},
+		for todo in @props.todos
+			@li {},
+				@input { type: 'checkbox', checkedLink: todo.done }
+				todo.text
+	</code></pre>
+	<pre><code>
+	<ul class="unstyled">
+	  {{#each todos}}
+			<li>
+				&lt;input type="checkbox" {{bindAttr checked="done"}}&gt;
+				<span>{{text}}</span>
+			</li>
+		{{/each}}
+	</ul>
+	</code></pre>
+</section>
