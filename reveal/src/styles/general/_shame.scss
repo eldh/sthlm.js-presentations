@@ -2,6 +2,15 @@
 .slide-background {
 	// background-color: #333 !important;
 }
+
+a {
+	color:$font-color;
+	text-decoration: none;
+	transition: all .1s linear;
+	&:hover {
+		color:$font-color - 30;
+	}
+}
 .horiz-flex {
 	display: flex;
 	align-items: center;
