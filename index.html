@@ -1,0 +1,410 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>React. Sthlm.js.</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/main.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h3>Ambitious apps</h3>
+					<h5>with</h5>
+					<h1>React &amp; Backbone</h1>
+					<h5 class="bottom-margin">sthlm.js</h5>
+					<h6>April 23, 2014</h6>
+				</section>
+				<section>
+					<section>
+<h3>@eldh</h3>
+<h1>Designer & developer</h1>
+</section>
+
+
+				</section>
+				<section data-background="#775221">
+					<section>
+	<h1>Selecting a framework</h1>
+	<aside class="notes">
+		We were going to select a framework for our new apps here at Quinyx, so we looked at the "usual suspects" - Backbone, Ember, Angular, Knockout...
+
+		What do they have in common?
+	</aside>
+</section>
+<section>
+	<h2>MV*</h2>
+	<h2>Templates</h2>
+	<h2>Data binding</h2>
+
+	<aside class="notes">
+		M-V-Whatever
+		Templates with some crippled logic
+		Data binding to help keep views and models in sync.
+	</aside>
+</section>
+<section>
+	<pre><code>
+	<ul class="unstyled">
+		<li ng-repeat="todo in todos">
+			<input type="checkbox" ng-model="todo.done">
+			<span>{{todo.text}}</span>
+		</li>
+	</ul>
+	</code></pre>
+	<pre><code>
+	<ul class="unstyled">
+	  {{#each todos}}
+			<li>
+				&lt;input type="checkbox" {{bindAttr checked="done"}}&gt;
+				<span>{{text}}</span>
+			</li>
+		{{/each}}
+	</ul>
+	</code></pre>
+	<aside class="notes">
+		So you end up with this stuff. Which works ok. It's familiar to everyone?
+		
+		There are a couple of things that bother me with these frameworks. First of all, performance. Performance was the #1 priority for us when selecting frameworks. And these frameworks tendes to run into performance issues. There was a talk on Sthlm.js a while back where some people from MTGx I think had managed to get their Angular app to update in 1.5 sec instead of 8 sec. I'm not a very good coder, so I was a bit hesitant to use a framework where it's possible to get that kind of performance.
+
+		Both Angular and Ember, the main contenders, also has a lot of framework specific concepts and "ways of doing things" that I didn't really like.
+	</aside>
+</section>
+
+<section data-background='img/different.jpg'>
+	<h3 class="dark-text">And now for something completely different<br><br><br><br><br><br><br><br><br></h3>
+	<aside class="notes">
+		We decided not to go down that road.
+	</aside>
+</section>
+
+
+				</section>
+				<section data-background="#3B5998">
+					<section>
+	<h1>React</h1>
+	<aside class="notes">
+		Let's talk about react.
+	</aside>
+</section>
+
+<section>
+	<h2>Made by <strong>facebook</strong></h2>
+	<aside class="notes">
+		It's made by facebook, used on facebook (of course) and instagram.
+
+		Open sourced last year.
+	</aside>
+</section>
+
+
+<section>
+	<h1>Only <strong>UI</strong></h1>
+	<h3>Renders UI and responds to events</h3>
+	<aside class="notes">
+		React only handles the UI. It doesn't care about the rest of your application.
+
+		You could use it as thee V to your MVC. Like we do. It's also been used with Angular.
+	</aside>
+</section>
+
+<section>
+	<h2>DOM operations are slow &amp; hard</h2>
+	<h2>Javascript is fast</h2>
+	<aside class="notes">
+		DOM operations are really slow, which means you have to optimize them to get decent performance.
+		DOM operations are also hard to optimize.
+		
+		Javascript is fast. We can use javascript to help us solve the problems with DOM operations.
+
+		With these facts as base, the people who designed React decided to do re-think some established best practices.
+	</aside>
+</section>
+
+<section>
+	<h1>Virtual DOM <br>&amp;<br> synthetic events</h1>
+	<aside class="notes">
+		Why? To be able to be smart about which parts of the view we need to update. Ergo, make it really fast. React also batches DOM operations to make things even faster.
+
+		There is another flip side to this. You're not tied to a browser, or even to a real DOM. You can just as easily render to a canvas or whatever. The virtual dom is just a heirarchy of your view components.
+	</aside>
+</section>
+<section>
+	<h1>Data flow</h1>
+	<aside class="notes">
+		Why? To enable updating the entire app state every time.
+
+		If a model changes, all the related views will update.
+
+		Example: Update my birth date. Means my age changes, and number of days to my birthday changes, and that list of people who share birthday with me changes. I don't need to care about any of it. I don't have to rely on digest loops or data binding or anything.
+	</aside>
+</section>
+
+<section>
+	<h1>No templates</h1>
+	<aside class="notes">
+		So, we are disconnecting ourselves from the DOM. Everything in the React apps is pure JS. There are no templates.
+
+		The first thing I said after looking at React was "It looks ok, but it needs templates". Why? 
+
+		Templates are not seperation of concerns. They are a separation of technologies.
+
+		They represent initial state, then view code moulds the DOM in response to state changes.
+		
+		Templates are purposefully crippled.
+
+		With react, you daclaritively describe behaviour and state using a powerful programming language (javascript).
+	</aside>
+</section>
+
+<section>
+	<h1>Syntax</h1>
+	<aside class="notes">
+		Just a quick mention on syntax
+	</aside>
+</section>
+
+<section>
+	<h2>jsx</h2>
+	<pre><code>
+	/** @jsx React.DOM */
+	var HelloMessage = React.createClass({
+		render: function() {
+			return <div>Hello {this.props.name}</div>;
+		}
+	});
+	</code></pre>
+	<pre><code>
+	&lt;HelloMessage name="John Doe" /&gt;
+	</code></pre>
+	<pre><code>
+	<div>Hello John Doe</div>
+	</code></pre>
+	<aside class="notes">
+		React comes with a js abstraction called jsx that makes component declarations look a bit more like html.
+	</aside>
+</section>
+<section>
+	<h2>Javascript</h2>
+	<pre><code>
+	var HelloMessage = React.createClass({displayName: 'HelloMessage',
+		render: function() {
+			return React.DOM.div(null, "Hello ", this.props.name);
+		}
+	});
+	</code></pre>
+	<pre><code>
+	HelloMessage({name: 'John Doe'});
+	</code></pre>
+	<pre><code>
+	<div>Hello John Doe</div>
+	</code></pre>
+	<aside class="notes">
+		It's completely volontary to use and compiles into normalie js as such.
+	</aside>
+</section>
+<!-- <section>
+	<h2>Coffeescript</h2>
+	<pre><code>
+	HelloMessage = React.createClass
+		displayName: "HelloMessage"
+		render: ->
+			React.DOM.div {},
+				"Hello #{@props.name}"
+	</code></pre>
+	<pre><code>
+	HelloMessage
+		name: 'John Doe'
+	</code></pre>
+	<pre><code>
+	<div>Hello John Doe</div>
+	</code></pre>
+</section>
+ --><section>
+	<pre><code>
+	@ul {className: 'unstyled'},
+		for todo in @props.todos
+			@li {},
+				@input { type: 'checkbox', checkedLink: todo.done }
+				todo.text
+	</code></pre>
+	<pre><code>
+	<ul class="unstyled">
+	  {{#each todos}}
+			<li>
+				&lt;input type="checkbox" {{bindAttr checked="done"}}&gt;
+				<span>{{text}}</span>
+			</li>
+		{{/each}}
+	</ul>
+	</code></pre>
+</section>
+
+				</section>
+
+				<section data-background="#3B5998">
+					<section>
+	<h1>backbone &amp; react</h1>
+	<aside class="notes">
+		We have done a few things to make react fit better in with our workflow.
+	</aside>
+</section>
+<section>
+	<h2>Listen to backbone model changes</h2>
+	<pre><code>
+	subscribe: (obj) ->
+		if obj instanceof Backbone.Collection or obj instanceof Backbone.Model
+			_throttledForceUpdate = _.debounce @update.bind(this, null), 0
+			obj.on "add remove change reset sort sync", _throttledForceUpdate, this
+			true
+		false
+
+	update: ->
+		@forceUpdate() if @isMounted()
+	</code></pre>
+
+	<aside class="notes">
+		Just listen to events on backbone models and collections and tell react components to update.
+	</aside>
+</section>
+<section>
+	<h2>Attach tags to 'this'</h2>
+	<div class="horiz-flex">
+		<pre><code>
+			React.DOM.div
+		</code></pre>
+		<h4>&#8594;</h4>
+		<pre><code>
+			@div
+		</code></pre>
+		
+	</div>
+
+	<aside class="notes">
+		Bind React.DOM class references to 'this' for easy access
+	</aside>
+</section>
+<section>
+	<h1>Demo!</h1>
+	<aside class="notes">
+		Show button/login. And dev tools!
+	</aside>
+</section>
+				</section>
+
+				<section data-background="#3B5998">
+					<section>
+	<h1>Verdict</h1>
+	<aside class="notes">
+		We have used and evolved this setup for about 3 months
+	</aside>
+</section>
+<section>
+	<h1>Benefits</h1>
+	<h3 class="fragment">+ Performance</h3>
+	<h3 class="fragment">+ Component based</h3>
+	<h3 class="fragment">+ Code makes sense</h3>
+	<h3 class="fragment">+ Testing</h3>
+	<aside class="notes">
+		React is fast. Angular will become faster when object.observe arrives. Ember will get faster when HTMLBars arrives. React is fast now and will continue to get faster as JS engines get faster. So far preformance have been a non-issue for us.
+
+		Organizing your code as reusable, self-contained components makes sense.
+
+		It's surprisingly easy to get into the code. The api is really nice and the concepts are easy to learn. It's easy to write understandable and maintainable code with react. Data flow + virtual DOM is a very clean way of keeping the views in sync. We have very few conversations about "the best way to do things in React".
+
+		Since everything is just vanilla JS it's really easy to test most of the code base. It's even easy to test the code that used to be in your templates.
+	</aside>
+</section>
+<section>
+	<h1>Concerns</h1>
+	<h3 class="fragment">- Maturity</h3>
+	<h3 class="fragment">- Community</h3>
+	<h3 class="fragment">- Testing</h3>
+	<aside class="notes">
+		React is still evolving quickly, a lot of stuff is still improving, and it's still not 1.0. Though the api is relatively stable. 
+
+		The community is still small, but growing.
+
+		Testing tools are getting better, but! Unit testing components is a bit of a hassle. You have to use JSDOM, and it's buggy. Integration tests with phantom or selenium comes to the rescue.
+
+		In total, I really like React and I think our setup is working surprisingly well. 
+	</aside>
+</section>
+
+				</section>
+				<section data-background="#3B5998">
+					<h1>Questions?</h1>
+				</section>
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+		<script src="js/main.js"></script>
+
+
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: false,
+				progress: false,
+				history: true,
+				center: true,
+				width: '100%',
+				height: '100%',
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'linear', // default/cube/page/concave/zoom/linear/fade/none
+				backgroundTransition: 'slide',
+				// Parallax scrolling
+				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+				// parallaxBackgroundSize: '2100px 900px',
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+		<script src="//localhost:35730/livereload.js"></script>
+
+	</body>
+</html>

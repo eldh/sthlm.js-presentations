@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Sthlm.js. Gulp.</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="/css/reveal.css">
+		<link rel="stylesheet" href="/css/main.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="/lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section data-background="#e74c3c">
+					<h3>Building a better process</h3>
+					<h5>with</h5>
+					<h1>Gulp</h1>
+					<h5 class="bottom-margin">sthlm.js</h5>
+					<h6>April 23, 2014</h6>
+				</section>
+				<section data-background="#e74c3c">
+					<section>
+	<h1>Gulp is three things</h1>
+	<aside class="notes">
+		Gulp calls itself "the streaming build system"
+	</aside>
+</section>
+<section>
+	<h2>Streams</h2>
+	<h2 class="fragment">Vinyl</h2>
+	<h2 class="fragment">Orchestrator</h2>
+</section>
+<section>
+	<h1>Streams</h1>
+</section>
+<section data-background="/img/santa.gif">
+	<!-- <h1 class="dark-text" >Streams</h1> -->
+	<aside class="notes">
+		Streams is like a conveyor belt. You put something in at the start, it passes through a number of stations that each do one little thing and then finally it lands.
+
+		It's a really nice way of doing things in the build process, because it encourages you to use very small, focused plugins.
+	</aside>
+</section>
+<section>
+	<h1>Vinyl:</h1>
+	<h2>File meta data</h2>
+	<h2>Path &amp; Content</h2>
+	<aside class="notes">
+		Vinyl is a simple metadata object that describe a file. Gulp primarily uses the filesystem adapter for vinyl, gut could easily use dropbox, s3, ftp or whatever.
+
+		It allows for gulp to use a file abstraction rather than a real file. Though we always use a normal file system.
+	</aside>
+</section>
+<section>
+	<h1>Orchestrator:</h1>
+	<h2>A way to define and run tasks</h2>
+	<aside class="notes">
+		Orchestrator is a way to define and run tasks and dependencies with maximum concurrency.
+	</aside>
+</section>
+<section>
+	<h1>Gulp:</h1>
+	<h2>Fast</h2>
+	<h2>Code over configuration</h2>
+	<aside class="notes">
+		So, we have a nice way of modifying objects in small steps. A nice way to describe files as objects and a nice way to define tasks.
+
+		Gulp is fast for two reasons: First, because it works with file meta objects and doesn't need to write to temp files.
+		Second, because it runs everything with waximum concurrency.
+
+		You define everything with code.
+	</aside>
+</section>
+
+				</section>
+				<section data-background="#e74c3c">
+					<section>
+	<h1>What are we trying to achieve?</h1>
+	<aside class="notes">
+		Grunt is a lot better than gulp in most ways. Much better community, more and better plugins etc.
+
+		So why would you use gulp? It's fast, yeah, but why does that matter?
+	</aside>
+</section>
+<section>
+	<h1><a href="http://vimeo.com/36579366">Immediate feedback</a></h1>
+
+	<aside class="notes">
+		Imagine drawing something. You have a pen and paper. But you have to flip the paper and wait five seconds before the line that you just drew appears.
+
+		What would that do to your creativity? How different would your end result be? How much different would your thought process be if you had to work with a pen and paper that worked like that?
+
+		That's what coding is like. If you're lucky.
+
+		We're not trying to just make our build process a bit faster. We're trying to enable a different way of thinking about code and the results of the code we write.
+	</aside>
+</section>
+<section>
+	<h1>"Creation is about discovery"</h1>
+	<h4>- Bret Victor</h4>
+
+	<aside class="notes">
+		What I want to achieve is a process where we're using code like we use a pencil or a paint brush. To make that happen we need a much closer connection between input and output, between code and program. We want to enable discovery, through code.
+
+		Gulp doesn't acheive that. We're actually not even close to an ideal process. But I think it's the best tool we have at the moment.
+	</aside>
+</section>
+<section>
+	<h3>Dual screens - code and output</h3>
+	<h3>Live reload</h3>
+
+	<aside class="notes">
+		So how have our way of working changed?
+
+		Almost never use dev tools for setting breakpoints or going through or changing code.
+	</aside>
+</section>
+
+				</section>
+				<section data-background="#e74c3c">
+					<section>
+	<pre><code>
+	gulp.task "_reveal_include", ->
+		gulp.src "src/slides/**/*.html"
+			.pipe includer()
+			.pipe gulp.dest 'app/'
+			.pipe livereload()
+		return
+
+	gulp.task '_reveal', ->
+		gulp.watch "src/slides/**/*.*", ['_reveal_include']
+	</code></pre>
+</section>
+<section>
+	<pre><code>
+	gulp.task "_dist-styles", ->
+		gulp.src file
+			.pipe sass
+				includePaths: includePaths
+				outputStyle: "compressed"
+				sourceComments: "normal"
+				file: file
+			.on "error", logExit
+			.pipe prefix "last 2 versions", "ie 10", "Android 4"
+			.pipe csso()
+			.pipe gulp.dest target + "css/"
+	</code></pre>
+</section>
+<section><h1>DEMO!</h1></section>
+				</section>
+				<section data-background="#e74c3c">
+					<section>
+	<h1>Verdict</h1>
+	<aside class="notes">
+		We have used and evolved this setup for about 3 months
+	</aside>
+</section>
+<section>
+	<h1>Benefits</h1>
+	<h3 class="fragment">+ SPEED</h3>
+	<h3 class="fragment">+ Code > config</h3>
+	<aside class="notes">
+
+	</aside>
+</section>
+<section>
+	<h1>Concerns</h1>
+	<h3 class="fragment">- Maturity</h3>
+	<h3 class="fragment">- Small ecosystem</h3>
+	<aside class="notes">
+		Gulp is still not very mature. A major api change is announced in Gulp 4 (with new version of Orchestrator). 
+
+		The ecosystem is still not as big as Grunt, a lot of plugins lack functionality or are missing. For example, my favorite style guide generator Sassdown is still grunt only.
+
+		Not that easy to find info.
+	</aside>
+</section>
+
+				</section>
+				<section data-background="#e74c3c">
+					<section>
+	<h1>The future process</h1>
+	<aside class="notes">
+		We're going to stray a bit from gulp and into the future. Not the future of build tools, but rather the future of development tools.
+	</aside>
+</section>
+<section>
+	<h4>THE</h4>
+	<h1>code-compile-run</h1>
+	<h4>LOOP</h4>
+
+	<aside class="notes">
+		We are still a bit stuck in the code-compile-run loop.
+
+		There are initiatives on many fronts to make tools for us to create digital things in new ways. Projects that try to break out of the code-compile-run loop.
+
+		Some are taking a visual approach, like <a href="http://macaw.co">Macaw</a> and <a href="http://www.weld.io/">Weld</a>. They make it possible to modify the "interface", but at the same time they break the connection to the code.
+
+		Some, like <a href="http://brackets.io/">Brackets</a>, <a href="http://www.lighttable.com/">LightTable</a> and <a href="http://noflojs.org/">NoFlo</a> enhance they way we work with code. Either by visualizing code structure and data flow or by bringing more visual tools into the editor.
+
+		I think we need tools that do both. 
+
+		To go back to the example of the pen. We need to both be able draw freely, to see what we draw immediately and to easily modify the output directly. That is, we need to get immediate feedback on the code we write, and we ALSO need to be able to change the code by modifying the output. 
+
+		If we view both the code that we write and the output, whatever it way be, as representations of the same object, then we should be able to modify both. The code is a representation of the UI as much as the other way around. When we can do that I would be a lot happier.
+	</aside>
+</section>
+<section>
+	<div class="horiz-flex">
+		<div class="box"><pre><code><h1>abc</h1></code></pre></div>
+		<div class="box"><span class="h2-size">&#8594;</span></div>
+		<div class="box"><span class="h1-size">*</span></div>
+		<div class="box"><span class="h2-size">&#8594;</span></div>
+		<div class="box box--framed"><span class="h1-size">abc</span></div>
+	</div>
+	<aside class="notes">
+		The first step is to make the code-compile-run loop infinitely small.
+		The second step is to better visualize code output. For example, visualizing how data flows through the applications (when running unit tests) would be a natural development.
+	</aside>
+</section>
+<section>
+	<div class="horiz-flex">
+		<div class="box"><pre><code><h1>abc</h1></code></pre></div>
+		<div class="box"><span class="h2-size">&#8596;</span></div>
+		<div class="box"><span class="h1-size">*</span></div>
+		<div class="box"><span class="h2-size">&#8596;</span></div>
+		<div class="box box--framed"><span class="h1-size">abc</span></div>
+	</div>
+	<aside class="notes">
+		The next step is to blur the line between code and output. Code and output are both representations of the same thing, and changing either should change the other. in this step the visual tools like macaw or weld have completely merged with our code tools.
+
+		I'm actually really excited for the future of coding (or "telling computers what to do").
+	</aside>
+</section>
+				</section>
+				<section data-background="#e74c3c">
+					<h1>Questions?</h1>
+				</section>
+			</div>
+
+		</div>
+
+		<script src="/lib/js/head.min.js"></script>
+		<script src="/js/reveal.min.js"></script>
+		<script src="/js/main.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: false,
+				progress: false,
+				history: true,
+				center: true,
+				width: '90%',
+				height: '100%',
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'linear', // default/cube/page/concave/zoom/linear/fade/none
+				backgroundTransition: 'slide',
+				// Parallax scrolling
+				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+				// parallaxBackgroundSize: '2100px 900px',
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: '/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: '/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+		<script src="//localhost:35730/livereload.js"></script>
+
+	</body>
+</html>
